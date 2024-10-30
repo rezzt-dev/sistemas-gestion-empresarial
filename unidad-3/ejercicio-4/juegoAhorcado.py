@@ -4,7 +4,7 @@ import random
 from rich import print
 
  # constants & variables =>
-listWords = ["pithon", "programacion", "computadora", "juego", "desarrollo"]
+listWords = ["python", "programacion", "computadora", "juego", "desarrollo"]
 
  # main function =>
 def __main ():

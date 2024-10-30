@@ -28,7 +28,7 @@ def __searchLetters (text, letters):
 def __countWords (text):
   return len(text.split())
 
-def __returnFirstSecondWords (text):
+def __returnFirstLastWords (text):
   words = text.split()
   return words[0], words[-1]
 
@@ -41,7 +41,7 @@ def __existsPython (text):
 def __createDictionary (text, letters):
   countLetters = __searchLetters(text, letters)
   totalWords = __countWords(text)
-  firstWord, secondWord = __returnFirstSecondWords(text)
+  firstWord, lastWord = __returnFirstLastWords(text)
   invertedText = __invertText(text)
   existsPython = __existsPython(text)
   
@@ -49,7 +49,7 @@ def __createDictionary (text, letters):
     "countLetters": countLetters,
     "totalWords": totalWords,
     "firstWord": firstWord,
-    "secondWord": secondWord,
+    "lastWord": lastWord,
     "invertedText": invertedText,
     "existsPython": existsPython
   }
@@ -59,7 +59,7 @@ def __printResults (results):
   print(f"[bold white]  - Conteo de Letras: {results['countLetters']}[/]")
   print(f"[bold white]  - Total de palabras: {results['totalWords']}[/]")
   print(f"[bold white]  - Primera palabra: {results['firstWord']}[/]")
-  print(f"[bold white]  - Segunda palabra: {results['secondWord']}[/]")
+  print(f"[bold white]  - Ultima palabra: {results['lastWord']}[/]")
   print(f"[bold white]  - Texto invertido: {results['invertedText']}[/]")
   print(f"[bold white]  - Existe Python: {results['existsPython']}[/]")
 
