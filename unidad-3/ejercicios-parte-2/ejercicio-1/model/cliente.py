@@ -1,5 +1,5 @@
  # import libraries =>
-from person import Persona
+from .person import Persona
 
  # main class =>
 class Cliente(Persona):
@@ -11,7 +11,7 @@ class Cliente(Persona):
  #———————————————————————————————————————————————————————————————————————————————————————
    # rest functions =>
     # function | depositar | agrega una cantidad determinada al balance ->
-  def __depositar(self, inputCantidad):
+  def depositar(self, inputCantidad):
     if inputCantidad > 0:
       self.balance += inputCantidad
       return True
@@ -20,7 +20,7 @@ class Cliente(Persona):
 
    #———————————————————————————————————————————————————————————————————————————————————————
     # function | retirar | eliminar una cantidad determinada al balance ->
-  def __retirar(self, inputCantidad):
+  def retirar(self, inputCantidad):
     if (0 < inputCantidad <= self.balance):
       self.balance -= inputCantidad
       return True
@@ -29,6 +29,6 @@ class Cliente(Persona):
     
    #———————————————————————————————————————————————————————————————————————————————————————
     # function | printData | imprime la informacion del cliente ->
-  def __printData(self):
-    dataPersona = super().__printData()
+  def printData(self):
+    dataPersona = super().printData()
     return f"{dataPersona} -> Cuenta: {self.numeroCuenta} | Saldo: {self.balance}"

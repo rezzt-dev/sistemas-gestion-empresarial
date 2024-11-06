@@ -25,24 +25,21 @@ def __main():
       case 1:
         cantidad = float(typer.prompt("  - Ingrese la cantidad que desea depositar"))
         
-        if ((cliente.__depositar(cantidad)) == True):
+        if ((cliente.depositar(cantidad)) == True):
           print("[bold green]   / Cantidad ingresada correctamente.[/]")
         else:
           print("[bold red]   / Ha ocurrido un error. No se ha podido ingresar la cantidad.[/]")
-        break
       case 2:
         cantidad = float(typer.prompt("  - Ingrese la cantidad que desea retirar"))
 
-        if ((cliente.__retirar(cantidad)) == True):
+        if ((cliente.retirar(cantidad)) == True):
           print("[bold green]   / Cantidad retirada correctamente.[/]")
         else:
           print("[bold red]   / Ha ocurrido un error. No se ha podido retirar la cantidad.[/]")
-        break
       case 3:
-        print(f"[bold white]   / {cliente.__printData()}[/]")
-        break
+        print(f"[bold white]   / {cliente.printData()}[/]")
       case 4:
-        print("[bold yellow] > Gracias por usar el Administrador de Recetas. Saliendo...[/]")
+        print("[bold yellow] > Gracias por usar el Gestor de Cuenta Bancaria. Saliendo...[/]")
         exit()
     
     __waitKey();
@@ -57,6 +54,10 @@ def __welcomeMessage ():
  #———————————————————————————————————————————————————————————————————————————————————————
   # function | create client | permite crear un objeto cliente ->
 def __createClient ():
+  __clearConsole()
+  print("[bold blue]/script cargando...[/]")
+  print("[bold green] Bienvenido a la Creacion de Usuarios[/]")
+  
   tempNombre = str(typer.prompt("  - Ingrese su nombre"))
   tempApellido = str(typer.prompt("  - Ingrese su apellido"))
   tempNumCuenta = int(typer.prompt("  - Ingrese su numero de cuenta"))
@@ -71,7 +72,7 @@ def __clearConsole ():
  #———————————————————————————————————————————————————————————————————————————————————————
   # function | wait key | espera a que se pulse enter para continuar ->
 def __waitKey ():
-  __printString("\n\n")
+  __printString("\n")
   input(" > Presiona Enter tecla para continuar...")
 
  #———————————————————————————————————————————————————————————————————————————————————————
