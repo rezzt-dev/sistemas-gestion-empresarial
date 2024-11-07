@@ -36,7 +36,7 @@ def __invertText (text):
   return text[::-1]
 
 def __existsPython (text):
-  return PYTHON_WORD in text
+  return PYTHON_WORD in text.lower()
 
 def __createDictionary (text, letters):
   countLetters = __searchLetters(text, letters)
