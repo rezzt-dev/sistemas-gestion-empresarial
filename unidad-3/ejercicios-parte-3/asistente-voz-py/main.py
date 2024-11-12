@@ -21,7 +21,7 @@ def __main ():
   __talk("Hola! Soy SEN tu asistente personal. ¿En que puedo ayudarte?")
 
   while True:
-    query = "chiste" #__audioToText()
+    query = __audioToText()
     
     if 'youtube' in query:
       __talk('Abriendo YouTube en tu Navegador Predeterminado.')

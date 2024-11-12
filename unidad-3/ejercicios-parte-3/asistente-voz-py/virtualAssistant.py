@@ -17,7 +17,7 @@ load_dotenv()
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[0].id)
+engine.setProperty('voice', voices[2].id)
 
 recognizer = sr.Recognizer()
 
