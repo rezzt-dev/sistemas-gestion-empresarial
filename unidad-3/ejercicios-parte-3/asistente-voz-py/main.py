@@ -8,8 +8,10 @@ import yfinance as yf
 import pyjokes
 import webbrowser
 import wikipedia
+from googletrans import Translator
 from rich import print
-from virtualAssistant import __talk, __audioToText, __getCurrentDate, __getCurrentTime
+from virtualAssistant import __talk, __audioToText, __getCurrentDate, __getCurrentTime, __searchGoogle
+from virtualAssistant import GOOGLE_API_KEY, SEARCH_ENGINE_ID
 
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
@@ -21,7 +23,7 @@ def __main ():
   __talk("Hola! Soy SEN tu asistente personal. ¿En que puedo ayudarte?")
 
   while True:
-    query = __audioToText()
+    query = "buscar"  #__audioToText()
     
     if 'youtube' in query:
       __talk('Abriendo YouTube en tu Navegador Predeterminado.')
@@ -59,19 +61,28 @@ def __main ():
         __talk(f"El precio actual de las acciones de la compañia {company} es de {price}")
         break
       except:
-        __talk('Lo siento pero no he podidio encontrar informacion sobre las compañias.')
+        __talk('Lo siento pero no he podido encontrar informacion sobre las compañias.')
         break
     
-    elif 'wikipedia' in query:
+    elif 'buscar' in query:
       __talk('¿Sobre que quieres informacion?')
-      searchQuery = __audioToText()
+      searchQuery = "Segunda Guerra Mundial" #__audioToText()
       
       try:
-        result = wikipedia.summary(searchQuery, sentences=2)
-        __talk(f"Segun Wikipedia: {result}")
-        break
-      except:
-        __talk("Lo siento pero no he podidio encontrar informacion de ese tema.")
+        results = __searchGoogle(searchQuery, GOOGLE_API_KEY, SEARCH_ENGINE_ID, num=1)
+        
+        if 'items' in results and results['items']:
+          snippet = results['items'][0]['snippet']
+          translator = Translator()
+          translated_snippet = translator.translate(snippet, dest='es').text
+          __talk(f"Según la búsqueda: {translated_snippet}")
+          break
+        
+        else:
+          __talk("Lo siento, no he podido encontrar información sobre ese tema.")
+          break
+      except Exception as ex:
+        __talk(f"Ha ocurrido un error al buscar la información: {str(ex)}")
         break
         
     elif 'salir' in query or 'adios' in query:
@@ -95,7 +106,7 @@ def __main ():
   # function | clearConsole | limpia la terminal -->
 def __clearConsole():
   os.system('cls' if platform.system() == 'Windows' else 'clear') 
-  
+
  #————————————————————————————————————————————————————————————————————————————————————————
   # function | welcomeMessage | mensaje de bienvenida ->
 def __welcomeMessage ():

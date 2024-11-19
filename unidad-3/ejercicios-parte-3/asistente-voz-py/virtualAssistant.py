@@ -5,11 +5,14 @@ import datetime
 import requests
 import os
 
+from bs4 import BeautifulSoup
 from rich import print
 from dotenv import load_dotenv
 
  # constants & variables ->
 OPENWEATHER_API_KEY = "f890390af0e545f23382edb7645a4547"
+GOOGLE_API_KEY = "AIzaSyAdvFqnfRoM_xjmz3MkQ8__7QOz_25vSmw"
+SEARCH_ENGINE_ID = "15e27d45e5488463d"
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
  # load & initialize ->
@@ -17,7 +20,7 @@ load_dotenv()
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[2].id)
+engine.setProperty('voice', voices[0].id)
 
 recognizer = sr.Recognizer()
 
@@ -80,3 +83,17 @@ def __getWeather(inputCity):
     return f"[bold green] > The temperature in {inputCity} is {temp}°C with {description}.[/]"
   else:
     return f"/ERROR! Sorry, I couldn't fetch the weather information."
+
+ #————————————————————————————————————————————————————————————————————————————————————————
+  # function | searchGoogle | obtiene informacion a traves del motor de Google ->
+def __searchGoogle (query, api_key, cse_id, **kwargs):
+  url = "https://www.googleapis.com/customsearch/v1"
+  params = {
+    'q': query,
+    'key': api_key,
+    'cx': cse_id,
+  }
+  
+  params.update(kwargs)
+  response = requests.get(url, params=params)
+  return response.json()
